@@ -1,0 +1,23 @@
+{
+  "name": "lionheart",
+  "version": "1.0.0",
+  "description": "A build-time CMS for Single Page Applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1337programming/lionheart.git"
+  },
+  "keywords": [
+    "cms",
+    "SPA"
+  ],
+  "author": "Tom Manion; Patrick Opie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1337programming/lionheart/issues"
+  },
+  "homepage": "https://github.com/1337programming/lionheart#readme"
+}
