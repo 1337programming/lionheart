@@ -1,0 +1,11 @@
+$enable-flex: true;
+$enable-transition: true;
+$body-bg: lighten(black, 90%);
+$card-bg: #FEFEFE;
+$card-cap-bg: #DDD;
+
+table > thead {
+	background-color: $card-cap-bg;
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";

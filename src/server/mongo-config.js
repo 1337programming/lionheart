@@ -1,6 +1,16 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://123.0.0.1:27017/lionheart', {
+var argv = require('yargs').argv;
+
+if (argv.debug) {
+	mongoose.set('debug', true);	
+}
+
+mongoose.connect('mongodb://localhost/lionheart', {
 	db: {
 		safe: true
 	}
+});
+mongoose.connection.on('error', function(err) {
+	console.error('MongoDB connection error: ' + err);
+	process.exit(-1);
 });
