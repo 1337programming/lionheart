@@ -41,7 +41,7 @@ config.resolve = {
 	alias: {
 		'es6-shim': path.join(__dirname, '/node_modules/es6-shim/es6-shim.js')
 	},
-	root: './',
+	root: __dirname,
     extensions: ['', '.ts', '.tsx', '.js', '.json', '.html']
 };
 
