@@ -1,3 +1,6 @@
 node_modules/
 dist/
 .tmp/
+*.js.map
+src/**/*.js
+src/*.js
