@@ -1,16 +1,19 @@
 {
-  "compilerOptions": {
-    "target": "ES5",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
-  },
-  "exclude": [
-    "node_modules",
-    "typings",
-    "tsd_typings"
-  ]
+    "compilerOptions": {
+        "target": "ES5",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false
+    },
+    "exclude": [
+        "node_modules",
+        "typings",
+        "tsd_typings"
+    ],
+    "files": [
+        "typings/main.d.ts"
+    ]
 }

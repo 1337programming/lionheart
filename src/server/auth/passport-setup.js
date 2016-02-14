@@ -6,7 +6,7 @@ function localAuthenticate(User, email, password, done) {
   User.findOneAsync({
     email: email.toLowerCase()
   })
-    .then(user => {
+    .then(function(user) {
       if (!user) {
         return done(null, false, {
           message: 'This email is not registered.'
