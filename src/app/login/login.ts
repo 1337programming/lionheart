@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/src/common/forms';
 import {Http, Headers} from 'angular2/http';
-import {RouterLink} from 'angular2/router';
+import {RouterLink, Router} from 'angular2/router';
 
 import {} from './node_modules/angular2/forms/'
 let style = require('!!raw!sass!./login.scss');
@@ -15,13 +15,16 @@ let style = require('!!raw!sass!./login.scss');
 
 export class Login {
   loginForm: ControlGroup;
-  http: Http;;
-  constructor(fb: FormBuilder, http: Http) {
+  http: Http;
+  private router: Router;
+
+  constructor(fb: FormBuilder, http: Http, router: Router) {
 	this.http = http;
     this.loginForm = fb.group({
       email: ["", Validators.required],
       password: ["", Validators.required]
     });
+    this.router = router;
   }
 
   signIn(event) {
@@ -36,13 +39,15 @@ export class Login {
 	  });
 	  this.http.post('http://localhost:8080/auth/local/', body, {headers}).subscribe(
 	    data => {
-			console.log('Got data response: ', data);
+			let body = JSON.parse(data.text());
+			if (body && body.token) {
+				let token = body.token;
+				localStorage.setItem('jwt', token);
+				this.router.navigate(['/Home']);
+			}
 	    },
 	    err => {
 			console.log('Error: ', err);
-	    },
-	    () => {
-			console.log('Authentication Complete');
 	    }
 	  );
   }
