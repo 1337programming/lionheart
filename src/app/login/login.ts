@@ -3,7 +3,6 @@ import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/src/commo
 import {Http, Headers} from 'angular2/http';
 import {RouterLink, Router} from 'angular2/router';
 
-import {} from './node_modules/angular2/forms/'
 let style = require('!!raw!sass!./login.scss');
 
 @Component({

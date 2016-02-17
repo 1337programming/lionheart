@@ -20,9 +20,13 @@ export class AuthRouterOutlet extends RouterOutlet {
   }
 
   activate(instruction: ComponentInstruction) {
-    var url = this.parentRouter.lastNavigationAttempt;
-    if (!this.publicRoutes[url] && !localStorage.getItem('jwt')) {
+    let url = this.parentRouter.lastNavigationAttempt;
+    let jwt = localStorage.getItem('jwt');
+    if (!this.publicRoutes[url] && !jwt) {
       this.parentRouter.navigateByUrl('/login');
+    }
+    if (this.publicRoutes[url] && jwt) {
+      this.parentRouter.navigateByUrl('/home')
     }
     return super.activate(instruction);
   }

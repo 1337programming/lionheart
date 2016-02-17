@@ -6,6 +6,7 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input ngControl="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <hr>
+        <p>Don't have an account? <a [routerLink]="['/Signup']">Sign up now</a></p>
     </form>
-    <p>Don't have an account? <a [routerLink]="['/Signup']">Sign up now</a></p>
 </div>
