@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
+import {RouterLink, Router} from 'angular2/router';
 
 let style = require('!!raw!sass!./namespaces.scss');
 
@@ -11,8 +11,13 @@ let style = require('!!raw!sass!./namespaces.scss');
 })
 
 export class Namespaces {
+	router: Router;
 
-	constructor() {
+	constructor(router: Router) {
+		this.router = router;
 	}
 
+	newNamespace() {
+		this.router.navigate(['/NewNamespace']);
+	}
 }
