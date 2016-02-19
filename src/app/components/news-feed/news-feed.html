@@ -1,4 +1,16 @@
-<div *ngFor="item of items">
-    <p>{{item.message}}</p>
-    <a class="btn" (click)="fetchItem(item.itemId)">open</a>
+<div *ngFor="#item of items" class="feed-container">
+    <div class="feed-box">
+        <div class="feed-message--wrap panel--reset">
+            <p [innerHTML]="item.message"></p>
+            <p class="date">{{item.date}}</p>
+
+            <ul class="share">
+                <li><a href="#like">Like</a></li>
+                <li><a href="#comment">Comment</a></li>
+                <li><a href="#share">Share</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+

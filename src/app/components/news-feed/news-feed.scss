@@ -1,0 +1,110 @@
+//@import "compass/css3";
+
+// Mixins
+// ======================================================
+
+@mixin bullets {
+  &:after {
+    content: "•";
+    margin: 0 5px;
+  }
+  &:last-child:after {
+    content: "";
+  }
+}
+
+
+// Global Styles
+// ======================================================
+
+* {
+  ////@include box-sizing(border-box);
+}
+
+html,body {
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: darken(#3F5892, 10);
+
+  &:hover {
+    color: scale-lightness(#3F5892, 50);
+  }
+}
+
+.utility-nav {
+  position: relative;
+}
+
+.status-nav {
+  padding: 14px 0;
+  width: 100%;
+  background: #E9E9E9;
+  text-align: center;
+
+  span {
+    //@include bullets;
+  }
+}
+
+.feed-box {
+  width: 100%;
+  padding: 0 10px;
+  position: relative;
+  margin: 10px auto;
+}
+
+.feed-message--wrap {
+  margin: 60px 0;
+  padding: 10px;
+  position: relative;
+  background: white;
+
+  &:first-child {
+    margin-top: 10px;
+  }
+}
+
+.share {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  flew-direction: row;
+  background: #EFF2F5;
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 33.333333%;
+    border-right: 2px solid #DBDEE1;
+    text-align: center;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &:hover {
+      background: #939597;
+      text-decoration: none;
+    }
+    
+    &:active {
+      background: #0275d8;
+    }
+  }
+}
+
+.date {
+  font-size: 10px;
+}

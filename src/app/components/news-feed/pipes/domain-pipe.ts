@@ -1,4 +1,4 @@
-import {Pipe} from 'angular2/core';
+import {Pipe, PipeTransform} from 'angular2/core';
 
 /**
  * @example
@@ -6,8 +6,9 @@ import {Pipe} from 'angular2/core';
  *   DomainPipe.transform(domain)); // locomotivecms.com
  * @return {string}
  */
-export class DomainPipe extends Pipe {
-  static transform(str:string):any {
+@Pipe({name: 'domainPipe'})
+export class DomainPipe implements PipeTransform {
+  transform(str:string) {
     if (!str) {
       return '';
     }

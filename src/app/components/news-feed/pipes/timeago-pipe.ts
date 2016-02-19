@@ -5,7 +5,7 @@ import * as moment from 'moment';
 const momentConstructor: (value?: any) => moment.Moment = (<any>moment).default || moment;
 
 @Pipe({ name: 'amTimeAgo', pure: false })
-export class TimeAgoPipe implements PipeTransform, OnDestroy {
+export class TimeAgo implements PipeTransform, OnDestroy {
   private _currentTimer: number;
 
   constructor(private _cdRef: ChangeDetectorRef) {

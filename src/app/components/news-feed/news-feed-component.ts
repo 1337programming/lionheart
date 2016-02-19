@@ -4,17 +4,18 @@ import {Component, View} from 'angular2/core';
 import {Response} from 'angular2/http';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {NewsFeedService} from './services/news-feed-service';
-import {timeAgo} from './services/timeago-pipe';
-import {DomainPipe} from './services/domain-pipe';
+import {TimeAgo} from './pipes/timeago-pipe';
+import {DomainPipe} from './pipes/domain-pipe';
 import {NewsFeedItem} from './classes/news-feed-item';
+
+var mockFeed = require('./mock/news-feed.json');
 
 @Component({
   selector: 'news-feed',
   providers: [NewsFeedService],
-  directives: [ROUTER_DIRECTIVES]
 })
 @View({
-  template: require('.news-feed.html'),
+  template: require('./news-feed.html'),
   styles: [style]
 })
 export class NewsFeed {
@@ -25,19 +26,24 @@ export class NewsFeed {
   newsFeedInstance:NewsFeedService;
 
   constructor(newsFeedInstance:NewsFeedService) {
-    this.domainPipe = DomainPipe.transform;
+    this.domainPipe = DomainPipe;
 
     // Make accessible in other methods.
     this.newsFeedInstance = newsFeedInstance;
 
-    this.timeAgo = timeAgo;
-    fetchData();
+    this.timeAgo = TimeAgo;
+    //this.fetchData();
+    this.items = [];
+    for (var i:number = 0; i < mockFeed.length; i++) { // TODO remove mock
+      var item:NewsFeedItem = new NewsFeedItem(mockFeed[i]);
+      this.items.push(item);
+    }
   }
 
   fetchData() {
-    this.newsFeedInstance.fetchItems().then((res:Response) => {
+    this.newsFeedInstance.fetchNewsFeed().then((res:Response) => {
       var items:Array<any> = res.json();
-      for (var i:number = 0; i < this.items.length; i++) {
+      for (var i:number = 0; i < items.length; i++) {
         var item:NewsFeedItem = new NewsFeedItem(items[i]);
         this.items.push(item);
       }
