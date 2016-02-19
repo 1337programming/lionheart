@@ -6,3 +6,6 @@ src/**/*.js
 src/*.js
 npm-debug.log
 typings/
+.idea
+*.swp
+!src/server/**/*.js
