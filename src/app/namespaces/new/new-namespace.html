@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Create a new Namespace</h1>
+    <p>A namespace is intended to create a collection of similar CMS data which also shares permissions.</p>
+    <form [ngFormModel]="newNamespaceForm" (submit)="createNamespace($event)">
+        <label for="inputEmail" class="sr-only">Name</label>
+        <input ngControl="name" type="text" id="inputEmail" class="form-control" placeholder="Name" required autofocus>
+
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+    </form>
+</div>

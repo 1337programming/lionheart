@@ -24,7 +24,6 @@ app.use(function(req, res, next) {
 
 var server = require('http').createServer(app);
 var io = module.exports = require('socket.io')(server);
-var KeyValue = require('./key-value/key-value');
 var argv = require('yargs').argv;
 var port = argv.port || 8080;
 
