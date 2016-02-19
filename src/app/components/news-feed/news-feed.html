@@ -1,0 +1,4 @@
+<div *ngFor="item of items">
+    <p>{{item.message}}</p>
+    <a class="btn" (click)="fetchItem(item.itemId)">open</a>
+</div>
