@@ -1,7 +1,7 @@
-import {Component, View} from 'angular2/core';
-import {Injectable} from 'angular2/core';
-import {Response} from 'angular2/http';
-import {LoginService} from './services/login-service';
+import {Component} from 'angular2/core';
+import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/src/common/forms';
+import {Http, Headers} from 'angular2/http';
+import {RouterLink, Router} from 'angular2/router';
 
 let style = require('!!raw!sass!./login.scss');
 
@@ -12,27 +12,45 @@ let style = require('!!raw!sass!./login.scss');
 @View({
   template: require('./login.html'),
   styles: [style],
+  directives: [RouterLink]
 })
 
 export class Login {
+  loginForm: ControlGroup;
+  http: Http;
+  private router: Router;
 
-  auth: any;
-  private loginService: LoginService;
-
-  constructor(loginService: LoginService) {
-    this.loginService = loginService;
-    this.publicAuth();
+  constructor(fb: FormBuilder, http: Http, router: Router) {
+	this.http = http;
+    this.loginForm = fb.group({
+      email: ["", Validators.required],
+      password: ["", Validators.required]
+    });
+    this.router = router;
   }
 
-  private login(username, password) {
-    this.loginService.privateAuth(username, password).then((res:Response) => {
-      this.auth = res.json().data;
-    });
-  }
+  signIn(event) {
+	  event.preventDefault();
 
-  private publicAuth() {
-    this.loginService.publicAuth().then((res:Response) => {
-      this.auth = res.json().data;
-    });
+	  var headers = new Headers();
+	  headers.append('Content-Type', 'application/json');
+	  var props = this.loginForm.value;
+	  var body = JSON.stringify({
+		  email: props.email,
+		  password: props.password
+	  });
+	  this.http.post('http://localhost:8080/auth/local/', body, {headers}).subscribe(
+	    data => {
+			let body = JSON.parse(data.text());
+			if (body && body.token) {
+				let token = body.token;
+				localStorage.setItem('jwt', token);
+				this.router.navigate(['/Home']);
+			}
+	    },
+	    err => {
+			console.log('Error: ', err);
+	    }
+	  );
   }
 }

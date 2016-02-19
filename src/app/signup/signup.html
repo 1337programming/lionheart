@@ -1,12 +1,15 @@
 <div class="container">
-    <form class="form-signin" [ngFormModel]="loginForm" (submit)="signIn($event)">
-        <h2 class="form-signin-heading">Please sign in</h2>
+    <form class="form-signin" [ngFormModel]="signupForm" (submit)="signUp($event)">
+        <h2 class="form-signin-heading">Sign up</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input ngControl="name" type="text" id="inputEmail" class="form-control" placeholder="Name" required autofocus>
+
         <label for="inputEmail" class="sr-only">Email address</label>
         <input ngControl="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
         <label for="inputPassword" class="sr-only">Password</label>
         <input ngControl="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <hr>
-        <p>Don't have an account? <a [routerLink]="['/Signup']">Sign up now</a></p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
     </form>
 </div>

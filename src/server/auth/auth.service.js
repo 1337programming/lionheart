@@ -23,15 +23,16 @@ authService.isAuthenticated = function isAuthenticated() {
         })
         // Attach user to request
         .use(function(req, res, next) {
-            User.findByIdAsync(req.user._id)
-                .then(user => {
-                    if (!user) {
-                        return res.status(401).end();
-                    }
-                    req.user = user;
-                    next();
-                })
-                .catch(err => next(err));
+            User.findById(req.user._id, function(err, user) {
+                if (err) {
+                    return next(err);
+                }
+                if (!user) {
+                    return res.status(401).end();
+                }
+                req.user = user;
+                next();
+            });
         });
 };
 

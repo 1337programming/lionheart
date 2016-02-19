@@ -3,27 +3,31 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 function localAuthenticate(User, email, password, done) {
-  User.findOneAsync({
+  User.findOne({
     email: email.toLowerCase()
-  })
-    .then(user => {
-      if (!user) {
-        return done(null, false, {
-          message: 'This email is not registered.'
-        });
+  }, function(err, user) {
+    if (err) {
+      return done(err);
+    }
+    if (!user) {
+      return done(null, false, {
+        message: 'This email is not registered.'
+      })
+    }
+    console.log('User, email', email, password);
+    user.authenticate(password, function(authError, authenticated) {
+      console.log(authError, authenticated);
+      if (authError) {
+        return done(authError);
       }
-      user.authenticate(password, function(authError, authenticated) {
-        if (authError) {
-          return done(authError);
-        }
-        if (!authenticated) {
-          return done(null, false, { message: 'This password is not correct.' });
-        } else {
-          return done(null, user);
-        }
-      });
-    })
-    .catch(err => done(err));
+      if (!authenticated) {
+        return done(null, false, {message: 'This password is not correct.'});
+      }
+      else {
+        return done(null, user);
+      }
+    });
+  });
 }
 
 passportSetup.setup = function(User) {

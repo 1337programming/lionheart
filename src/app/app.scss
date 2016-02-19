@@ -3,9 +3,31 @@ $enable-transition: true;
 $body-bg: lighten(black, 90%);
 $card-bg: #FEFEFE;
 $card-cap-bg: #DDD;
+$enable-rounded: false;
+
+
+//Colors
+$theme-color: 	#C19A6B;    //Lion!
+
+$gray-dark: darken($theme-color, 50%);
+$gray: darken($theme-color, 40%);
+$gray-light: $theme-color;
+$gray-lighter: lighten($theme-color, 20%);
+$gray-lightest: lighten($theme-color, 30%);
+
+$brand-primary:             #0275d8 !default;
+$brand-success:             #5cb85c !default;
+$brand-info:                #5bc0de !default;
+$brand-warning:             #f0ad4e !default;
+$brand-danger:              #d9534f !default;
+
 
 table > thead {
 	background-color: $card-cap-bg;
+}
+
+.flex {
+	display: flex;
 }
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
