@@ -29,10 +29,10 @@ export class Login {
   signIn(event) {
 	  event.preventDefault();
 
-	  var headers = new Headers();
+	  let headers = new Headers();
 	  headers.append('Content-Type', 'application/json');
-	  var props = this.loginForm.value;
-	  var body = JSON.stringify({
+	  let props = this.loginForm.value;
+	  let body = JSON.stringify({
 		  email: props.email,
 		  password: props.password
 	  });

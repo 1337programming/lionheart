@@ -30,4 +30,9 @@ table > thead {
 	display: flex;
 }
 
+.text-center {
+	text-align: center;
+	margin: 0 auto;
+}
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

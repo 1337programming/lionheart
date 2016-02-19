@@ -7,6 +7,9 @@ import {Signup} from './signup/signup';
 import {Namespaces} from './namespaces/namespaces';
 import {NewNamespace} from './namespaces/new/new-namespace';
 
+//Content
+import {Content} from './content/content';
+
 export class Router {
 	routes: Array<any>;
 	constructor() {
@@ -19,8 +22,13 @@ export class Router {
 			{ path: '/signup', name: 'Signup', component: Signup },
 
 			//Private Routes
+
+			//Namespaces
 			{ path: '/namespaces', name: 'Namespaces', component: Namespaces },
-			{ path: '/namespaces/new', name: 'NewNamespace', component: NewNamespace }
+			{ path: '/namespaces/new', name: 'NewNamespace', component: NewNamespace },
+
+			//Content
+			{ path: '/content', name: 'Content', component: Content}
 		];
 	}
 }
