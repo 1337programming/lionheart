@@ -28,6 +28,20 @@ var KeyValue = require('./key-value/key-value');
 var argv = require('yargs').argv;
 var port = argv.port || 8080;
 
+app.get('/newsfeed', function (req, res) {
+  res = setPermissions(res);
+  var obj = {html: null, data: null};
+  var userId = null, itemId = null;
+  if (req.query.userId) {
+    userId = req.query.userId;
+  }
+  if (req.query.itemId) {
+    itemId = req.query.itemId;
+  }
+  // TODO: return newsfeed or newsfeed item based on user or selected feed.
+
+});
+
 require('./mongo-config');
 require('./routes')(app);
 require('./socketio')(io);
