@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --hot --inline",
+    "dev": "webpack-dev-server --inline",
     "prod": "webpack --prod",
     "server": "node src/server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/1337programming/lionheart#readme",
   "dependencies": {
-    "angular2": "^2.0.0-beta.3",
+    "angular2": "^2.0.0-beta.7",
     "bluebird": "^3.2.2",
     "body-parser": "^1.15.0",
     "bootstrap": "git://github.com/twbs/bootstrap.git#v4-dev",
@@ -45,6 +45,7 @@
     "json-loader": "^0.5.4",
     "jsonwebtoken": "^5.5.4",
     "mongoose": "4.4.1",
+    "moment": "^2.10.3",
     "node-sass": "^3.4.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -58,7 +59,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
     "yargs": "^3.32.0",
-    "zone.js": "^0.5.11"
+    "zone.js": "^0.5.15"
   },
   "devDependencies": {}
 }

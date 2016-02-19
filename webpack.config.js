@@ -4,6 +4,7 @@ var path = require('path');
 var argv = require('yargs').argv;
 
 config.plugins = [];
+config.plugins.push(new webpack.HotModuleReplacementPlugin());
 var dest;
 if (argv.prod) {
     dest = path.join(__dirname, 'dist');

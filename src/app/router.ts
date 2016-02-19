@@ -11,7 +11,7 @@ import {NewNamespace} from './namespaces/new/new-namespace';
 import {Content} from './content/content';
 
 export class Router {
-	routes: Array<any>
+	routes: Array<any>;
 	constructor() {
 		this.routes = [
 			//Default Route
