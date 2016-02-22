@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/src/common/forms';
 import {Http, Headers} from 'angular2/http';
 import {Router} from 'angular2/router';
-
+import {UserService} from '../user/user.service';
 import {} from './node_modules/angular2/forms/'
 let style = require('!!raw!sass!./signup.scss');
 
@@ -10,20 +10,17 @@ let style = require('!!raw!sass!./signup.scss');
 	selector: 'home',
 	template: require('./signup.html'),
 	styles: [style],
+	providers: [UserService]
 })
 
 export class Signup {
 	signupForm: ControlGroup;
-	http: Http;
-	private router: Router;
-	constructor(fb: FormBuilder, http: Http, router: Router) {
-		this.http = http;
+	constructor(fb: FormBuilder, private http: Http, private router: Router, private userService: UserService) {
 		this.signupForm = fb.group({
 			name: ['', Validators.required],
 			email: ['', Validators.required],
 			password: ['', Validators.required]
 		});
-		this.router = router;
 	}
 
 	signUp(event) {

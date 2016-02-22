@@ -1,5 +1,7 @@
-<br>
-<hr>
-<div class="text-center">
-    <a (click)="logout()">Logout</a>
+<div *ngIf="userService.isLoggedIn">
+    <br>
+    <hr>
+    <div class="text-center">
+        <a (click)="logout()">Logout</a>
+    </div>
 </div>

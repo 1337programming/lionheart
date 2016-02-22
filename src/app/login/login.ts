@@ -2,33 +2,29 @@ import {Component} from 'angular2/core';
 import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/src/common/forms';
 import {Http, Headers} from 'angular2/http';
 import {RouterLink, Router} from 'angular2/router';
-
+import {UserService} from '../user/user.service';
 let style = require('!!raw!sass!./login.scss');
 
 @Component({
   selector: 'home',
   template: require('./login.html'),
   styles: [style],
-  directives: [RouterLink]
+  directives: [RouterLink],
+  providers: [UserService]
 })
 
 export class Login {
   loginForm: ControlGroup;
-  http: Http;
-  private router: Router;
 
-  constructor(fb: FormBuilder, http: Http, router: Router) {
-	this.http = http;
+  constructor(fb: FormBuilder, private http: Http, private router: Router, private userService: UserService) {
     this.loginForm = fb.group({
       email: ["", Validators.required],
       password: ["", Validators.required]
     });
-    this.router = router;
   }
 
   signIn(event) {
 	  event.preventDefault();
-
 	  let headers = new Headers();
 	  headers.append('Content-Type', 'application/json');
 	  let props = this.loginForm.value;
@@ -42,6 +38,7 @@ export class Login {
 			if (body && body.token) {
 				let token = body.token;
 				localStorage.setItem('jwt', token);
+				this.userService.updateLoggedInStatus();
 				this.router.navigate(['/Home']);
 			}
 	    },
