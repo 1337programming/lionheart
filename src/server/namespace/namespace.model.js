@@ -3,16 +3,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var NamespaceSchema = new Schema({
-  id: String,
   name: String,
   content: [{text: String, meta: {name: String}, fileType: String, authorable: Boolean}],
   permissions: Array
 });
 
-// virtuals
+// Virtuals
 NamespaceSchema.virtual('info').get(function () {
   return {
-    id: this.id,
     name: this.name,
     permission: this.permission
   };
@@ -25,5 +23,10 @@ NamespaceSchema.virtual('name.full').set(function (name) {
 NamespaceSchema.virtual('permissions.group').set(function (permissions) {
   this.permissions = permissions;
 });
+
+// Static
+NamespaceSchema.statics.findByName = function (name, cb) {
+  return this.find({name: new RegExp(name, 'i')}, cb);
+};
 
 module.exports = mongoose.model('Namespace', NamespaceSchema);
