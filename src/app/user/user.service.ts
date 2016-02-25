@@ -1,20 +1,31 @@
-import {Injectable, NgZone} from 'angular2/core';
+import {Injectable} from 'angular2/core';
+import {Subject, BehaviorSubject} from 'rxjs';
 
 @Injectable()
 export class UserService {
 	jwtToken: string;
-	public isLoggedIn: boolean
-	constructor(private ngZone: NgZone) {
+	public isLoggedIn: Subject<boolean> = new BehaviorSubject<boolean>(false);
+
+	constructor() {
 		this.updateLoggedInStatus();
+		this.isLoggedIn.subscribe((token) => {
+			console.log('WOOHOO');
+		});
 	}
 
-	updateLoggedInStatus(): void {
+	public updateLoggedInStatus(): void {
 		this.jwtToken = localStorage.getItem('jwt');
-		this.ngZone.run(() => {
+		console.log('Setting next subscription', !!this.jwtToken);
+		this.isLoggedIn.next(!!this.jwtToken);
 
-			this.isLoggedIn = !!this.jwtToken;
-			console.log('ngZone running!', this.isLoggedIn);
-		});
-		
+	}
+
+	setNextIsLoggedIn(val) {
+		console.log('Received val', val);
+		this.isLoggedIn.next(val);
+	}
+
+	get loggedIn() {
+		return this.isLoggedIn.asObservable().publish().refCount();
 	}
 }
