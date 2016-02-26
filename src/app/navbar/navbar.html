@@ -1,4 +1,4 @@
-<nav *ngIf="userService.isLoggedIn" class="navbar navbar-dark bg-inverse">
+<nav *ngIf="loggedIn" class="navbar navbar-dark bg-inverse">
     <a class="navbar-brand" [routerLink]="['/Home']">lionheart</a>
     <ul class="nav navbar-nav">
         <li class="nav-item active" [ngClass]="{active: isLocationEqual('/home')}">
