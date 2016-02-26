@@ -34,7 +34,7 @@ router.get('/:id', function(req, res) {
         if (!namespace) {
             return res.status(404).end();
         }
-        res.json(namespace.info);
+        res.json(namespace);
     });
 });
 
