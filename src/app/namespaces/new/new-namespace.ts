@@ -24,6 +24,7 @@ export class NewNamespace {
     console.log('Form submitted!');
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem('jwt'));
     let props = this.newNamespaceForm.value;
     let body = JSON.stringify({
       name: props.name

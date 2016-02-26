@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 
 var NamespaceSchema = new Schema({
   name: String,
-  content: Array
+  content: Array,
+  users: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 // Static

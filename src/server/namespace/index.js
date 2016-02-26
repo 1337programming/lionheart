@@ -4,10 +4,11 @@ var User = require('../user/user.model');
 var auth = require('../auth/auth.service');
 var mongoose = require('mongoose');
 
-router.post('/new', function(req, res) {
+router.post('/new', auth.isAuthenticated(), function(req, res) {
     var data = {
         name: req.body.name,
-        content: []
+        content: [],
+        users: [req.user._id]
     };
     var newNamespace = new Namespace(data);
     newNamespace.save(function(err, namespace, numAffected) {
@@ -37,16 +38,16 @@ router.get('/:id', function(req, res) {
     });
 });
 
-router.get('/', function(req, res) {
-    Namespace.find({}, function(err, namespaces) {
-        console.log('namespaces', namespaces);
+router.get('/', auth.isAuthenticated(), function(req, res) {
+    Namespace.find({
+        'users': req.user._id
+    }, function(err, namespaces) {
         res.send(namespaces);
     })
 });
 
 router.post('/update-content', function(req, res) {
     var data = req.body;
-    console.log(data);
     Namespace.findByIdAndUpdate(data.id, {
             $set: {
                 name: data.name,
