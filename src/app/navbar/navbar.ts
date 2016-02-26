@@ -10,7 +10,6 @@ let style = require('!!raw!sass!./navbar.scss');
 	template: require('./navbar.html'),
 	styles: [style],
 	directives: [RouterLink, NgClass, NgIf],
-	providers: [UserService],
 	changeDetection: ChangeDetectionStrategy.CheckAlways
 })
 
