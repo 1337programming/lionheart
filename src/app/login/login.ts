@@ -9,8 +9,7 @@ let style = require('!!raw!sass!./login.scss');
   selector: 'home',
   template: require('./login.html'),
   styles: [style],
-  directives: [RouterLink],
-  providers: [UserService]
+  directives: [RouterLink]
 })
 
 export class Login {

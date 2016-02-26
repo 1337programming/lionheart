@@ -116,26 +116,6 @@ UserController.changePassword = function changePassword(req, res, next) {
 };
 
 /**
- * Add namespace to user
- */
-UserController.addNamespace = function addNamespace(req, res, next) {
-  var userId = req.user._id;
-  var namespace = req.body;
-  User.findByIdAndUpdate(userId,
-    {$push: {"namespaces": namespace}},
-    {safe: true, upsert: true},
-    function (err, data) {
-      if (err) {
-        return next(err);
-      } else {
-        res.status(200).end();
-      }
-    }
-  );
-
-};
-
-/**
  * Get my info
  */
 UserController.me = function me(req, res, next) {

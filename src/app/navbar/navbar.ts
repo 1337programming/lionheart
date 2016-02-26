@@ -1,4 +1,4 @@
-import {Component, ChangeDetectionStrategy} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 import {NgClass, NgIf} from 'angular2/common';
 import {Location} from "angular2/router";
@@ -9,13 +9,18 @@ let style = require('!!raw!sass!./navbar.scss');
 	selector: 'navbar',
 	template: require('./navbar.html'),
 	styles: [style],
-	directives: [RouterLink, NgClass, NgIf],
-	providers: [UserService],
-	changeDetection: ChangeDetectionStrategy.CheckAlways
+	directives: [RouterLink, NgClass, NgIf]
 })
 
-export class Navbar {
+export class Navbar implements OnInit {
+	loggedIn: boolean = false;
 	constructor(private location: Location, private userService: UserService) {}
+
+	ngOnInit() {
+		this.userService.loggedInSubject.subscribe((loggedInStatus) => {
+			this.loggedIn = loggedInStatus;
+		});		
+	}
 
 	isLocationEqual(loc:string):boolean {
 		return this.location.path() === loc;

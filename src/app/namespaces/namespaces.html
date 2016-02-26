@@ -1,12 +1,11 @@
 <div class="container">
 	<h1>Manage Your Namespaces</h1>
     <button class="btn btn-primary" (click)="newNamespace()">Create a new Namespace</button>
-    <p>TODO: stylize name space</p>
     <div *ngFor="#namespace of links">
         <div>
-            <p>{{namespace.name}}</p>
-            <button class="btn btn-secondary" (click)="openNameSpace(namespace)"></button>
+            <h2>{{namespace.name}}</h2>
+            <button class="btn btn-secondary" (click)="openNamespace(namespace)">View</button>
         </div>
+        <hr>
     </div>
 </div>
-
