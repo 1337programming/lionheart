@@ -12,15 +12,8 @@ let style = require('!!raw!sass!./navbar.scss');
 	directives: [RouterLink, NgClass, NgIf]
 })
 
-export class Navbar implements OnInit {
-	loggedIn: boolean = false;
+export class Navbar {
 	constructor(private location: Location, private userService: UserService) {}
-
-	ngOnInit() {
-		this.userService.loggedInSubject.subscribe((loggedInStatus) => {
-			this.loggedIn = loggedInStatus;
-		});		
-	}
 
 	isLocationEqual(loc:string):boolean {
 		return this.location.path() === loc;
