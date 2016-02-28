@@ -4,15 +4,14 @@ var Schema = mongoose.Schema;
 
 var NamespaceSchema = new Schema({
   name: String,
-  content: [{text: String, meta: {name: String}, fileType: String, authorable: Boolean}],
-  permissions: Array
+  content: Array
 });
 
 // Virtuals
 NamespaceSchema.virtual('info').get(function () {
   return {
     name: this.name,
-    permission: this.permission
+    content: this.content
   };
 });
 
@@ -20,9 +19,11 @@ NamespaceSchema.virtual('name.full').set(function (name) {
   this.name = name;
 });
 
-NamespaceSchema.virtual('permissions.group').set(function (permissions) {
-  this.permissions = permissions;
+NamespaceSchema.virtual('content.add').set(function (content) {
+  this.content.push(content);
 });
+
+
 
 // Static
 NamespaceSchema.statics.findByName = function (name, cb) {

@@ -20,6 +20,7 @@ if (argv.prod) {
 
 config.debug = !!argv.debug;
 config.context = __dirname;
+config.devtool = 'source-map';
 
 config.devServer = {
     historyApiFallback: true,
