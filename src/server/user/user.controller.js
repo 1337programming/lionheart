@@ -122,12 +122,17 @@ UserController.addNamespace = function addNamespace(req, res, next) {
   var userId = req.user._id;
   var namespace = req.body;
   User.findByIdAndUpdate(userId,
-    {$push: {"namespace": namespace}},
+    {$push: {"namespaces": namespace}},
     {safe: true, upsert: true},
     function (err, data) {
-      console.log(err);
+      if (err) {
+        return next(err);
+      } else {
+        res.status(200).end();
+      }
     }
   );
+
 };
 
 /**

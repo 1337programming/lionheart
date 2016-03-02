@@ -26,7 +26,10 @@ export class Namespaces {
 
   // TODO: user should be defined globally
   private getUser() {
-    this.http.get('http://localhost:8080/api/users/me')
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', localStorage.getItem('jwt'));
+    this.http.get('http://localhost:8080/api/users/me', {headers})
       .subscribe(data => {
         let body = JSON.parse(data.text());
         this.user = body;
@@ -38,15 +41,15 @@ export class Namespaces {
     );
   }
 
-  private getNamespaces(names:Array<string>):void {
-    for (var i:number = 0; i < names.length; i++) {
-      this.http.get('http://localhost:8080/namespace/get-name/' + names[i])
+  private getNamespaces(namespaces:Array<any>):void {
+    for (var i:number = 0; i < namespaces.length; i++) {
+      this.http.get('http://localhost:8080/namespace/' + namespaces[i].id)
         .subscribe(data => {
           let body = JSON.parse(data.text());
           this.links.push(body);
         },
         err => {
-          console.log('Error getting ' + names[i], err);
+          console.log('Error getting ' + namespaces[i], err);
         }
       )
     }

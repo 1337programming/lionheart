@@ -38,7 +38,7 @@ export class Signup {
 			data => {
 				let body = JSON.parse(data.text());
 				if (body && body.token) {
-					let token = body.token;
+					let token = 'Bearer' + body.token;
 					localStorage.setItem('jwt', token);
 					this.router.navigate(['/Home']);
 				}
