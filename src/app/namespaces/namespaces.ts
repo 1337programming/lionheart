@@ -29,30 +29,14 @@ export class Namespaces {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', localStorage.getItem('jwt'));
-    this.http.get('http://localhost:8080/api/users/me', {headers})
+    this.http.get('http://localhost:8080/namespace/', {headers})
       .subscribe(data => {
         let body = JSON.parse(data.text());
-        this.user = body;
-        this.getNamespaces(body.namespaces);
+        this.links = body;
       },
-        err => {
-        console.log('Error getting user: ', err);
-      }
-    );
-  }
-
-  private getNamespaces(namespaces:Array<any>):void {
-    for (var i:number = 0; i < namespaces.length; i++) {
-      this.http.get('http://localhost:8080/namespace/' + namespaces[i].id)
-        .subscribe(data => {
-          let body = JSON.parse(data.text());
-          this.links.push(body);
-        },
-        err => {
-          console.log('Error getting ' + namespaces[i], err);
-        }
-      )
-    }
+      err => {
+        console.log('Error getting ', err);
+      });
   }
 
   openNamespace() {

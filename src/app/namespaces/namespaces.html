@@ -4,9 +4,10 @@
     <p>TODO: stylize name space</p>
     <div *ngFor="#namespace of links">
         <div>
-            <p>{{namespace.name}}</p>
-            <button class="btn btn-secondary" (click)="openNameSpace(namespace)"></button>
+            <h2>{{namespace.name}}</h2>
+            <button class="btn btn-secondary" (click)="openNameSpace(namespace)">View</button>
         </div>
+        <hr>
     </div>
 </div>
 
