@@ -9,3 +9,4 @@ typings/
 .idea
 *.swp
 !src/server/**/*.js
+.DS_Store
