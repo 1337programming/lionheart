@@ -4,6 +4,7 @@ import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/src/commo
 import {Http, Headers} from 'angular2/http';
 import {Namespace} from '../namespace.model';
 import {NamespaceService} from '../namespace.service';
+import {UserService} from '../../user/user.service';
 
 @Component({
   selector: 'view-namespace',
@@ -13,13 +14,10 @@ import {NamespaceService} from '../namespace.service';
 
 export class ViewNamespace {
   namespace: Namespace;
-  constructor(private params: RouteParams, private namespaceService: NamespaceService, http: Http) {
+  constructor(private router: Router, private params: RouteParams, private namespaceService: NamespaceService, http: Http, userService: UserService) {
   	this.namespace = namespaceService.currentNamespace;
   	if (!this.namespace) {
-	    let headers = new Headers();
-	    headers.append('Content-Type', 'application/json');
-	    headers.append('Authorization', localStorage.getItem('jwt'));
-	    http.get('http://localhost:8080/namespace/' + params.get('id'), {headers})
+	    http.get('http://localhost:8080/namespace/' + params.get('id'), userService.headersObj)
 	      .subscribe(response => {
 	        let data = JSON.parse(response.text());
 	        this.namespace = new Namespace(data._id, data.name, data.content, data.users);
@@ -28,5 +26,10 @@ export class ViewNamespace {
 	        console.log('Error getting ', err);
 	      });
   	}
+  }
+
+  addContent(namespace: Namespace) {
+  	this.namespaceService.currentNamespace = namespace;
+    this.router.navigate(['/NewContent', {namespaceId: namespace.id}]);
   }
 }

@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {Control, FormBuilder, Validators, ControlGroup} from 'angular2/src/common/forms';
-import {Http, Headers} from 'angular2/http';
+import {Http} from 'angular2/http';
 import {Router} from 'angular2/router';
 import {UserService} from '../user/user.service';
 import {} from './node_modules/angular2/forms/'
@@ -25,21 +25,19 @@ export class Signup {
 
 	signUp(event) {
 		event.preventDefault();
-
-		var headers = new Headers();
-		headers.append('Content-Type', 'application/json');
 		var props = this.signupForm.value;
 		var body = JSON.stringify({
 			name: props.name,
 			email: props.email,
 			password: props.password
 		});
-		this.http.post('http://localhost:8080/api/users/', body, { headers }).subscribe(
+		this.http.post('http://localhost:8080/api/users/', body, this.userService.headersObj).subscribe(
 			data => {
 				let body = JSON.parse(data.text());
 				if (body && body.token) {
 					let token = 'Bearer' + body.token;
 					localStorage.setItem('jwt', token);
+					this.userService.updateLoggedInStatus();
 					this.router.navigate(['/Home']);
 				}
 			},

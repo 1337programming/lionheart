@@ -1,5 +1,6 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouterLink, Router} from 'angular2/router';
+import {NamespaceService} from '../namespaces/namespace.service';
 
 @Component({
 	selector: 'content',
@@ -7,10 +8,11 @@ import {RouterLink, Router} from 'angular2/router';
 	directives: [RouterLink]
 })
 
-export class Content {
-	router: Router;
+export class Content implements OnInit {
+	constructor(private router: Router, private namespaceService: NamespaceService) {}
 
-	constructor(router: Router) {
-		this.router = router;
+	ngOnInit(): void {
+		this.namespaceService.updateNamespaces();
 	}
+
 }
