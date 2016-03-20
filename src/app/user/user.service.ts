@@ -16,4 +16,5 @@ export class UserService {
 	get isLoggedIn(): boolean {
 		return !!this.jwtToken;
 	}
+
 }

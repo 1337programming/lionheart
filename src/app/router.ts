@@ -2,6 +2,7 @@ import {RouteConfig} from 'angular2/router';
 import {Home} from './home/home';
 import {Login} from './login/login';
 import {Signup} from './signup/signup';
+import {UserPage} from './user/user-page/userpage.component';
 
 //Namespace
 import {Namespaces} from './namespaces/namespaces';
@@ -11,24 +12,27 @@ import {ViewNamespace} from './namespaces/view/view-namespace';
 import {Content} from './content/content';
 
 export class Router {
-	routes: Array<any>;
-	constructor() {
-		this.routes = [
-			//Default Route
-			{ path: '/home', name: 'Home', component: Home, useAsDefault: true },
+  routes:Array<any>;
 
-			//Public Routes
-			{ path: '/login', name: 'Login', component: Login },
-			{ path: '/signup', name: 'Signup', component: Signup },
+  constructor() {
+    this.routes = [
+      //Default Route
+      {path: '/home', name: 'Home', component: Home, useAsDefault: true},
 
-			//Private Routes
+      //Public Routes
+      {path: '/login', name: 'Login', component: Login},
+      {path: '/signup', name: 'Signup', component: Signup},
 
-			//Namespaces
-			{ path: '/namespaces', name: 'Namespaces', component: Namespaces },
-			{ path: '/namespaces/new', name: 'NewNamespace', component: NewNamespace },
-			{ path: '/namespaces/:id', name: 'ViewNamespace', component: ViewNamespace },
-			//Content
-			{ path: '/content', name: 'Content', component: Content}
-		];
-	}
+      //Private Routes
+
+      //Namespaces
+      {path: '/namespaces', name: 'Namespaces', component: Namespaces},
+      {path: '/namespaces/new', name: 'NewNamespace', component: NewNamespace},
+      {path: '/namespaces/:id', name: 'ViewNamespace', component: ViewNamespace},
+      //Content
+      {path: '/content', name: 'Content', component: Content},
+      //User Page
+      {path: '/user', name: 'UserPage', component: UserPage}
+    ];
+  }
 }
