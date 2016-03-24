@@ -1,22 +1,26 @@
 var router = require('express').Router();
-var Namespace = require('./namespace.model');
+var Content = require('./content.model');
 var User = require('../user/user.model');
 var auth = require('../auth/auth.service');
 var mongoose = require('mongoose');
 
-router.post('/', auth.isAuthenticated(), function(req, res) {
-    var data = {
-        name: req.body.name,
-        content: [],
-        users: [req.user._id]
-    };
-    var newNamespace = new Namespace(data);
-    newNamespace.save(function(err, namespace, numAffected) {
+router.post('/new', auth.isAuthenticated(), function(req, res) {
+	var date = new Date();
+    var newContent = new Content({
+        key: req.body.key,
+        value: req.body.value,
+        createdDate: date,
+        creator: req.user._id,
+        modifiedDate: date,
+        modifier: req.user._id,
+        description: req.body.description
+    });
+    newContent.save(function(err, content, numAffected) {
         if (err) {
             return res.status(500).send(err);
         }
 
-        res.json(namespace);
+        res.json(content);
     });
 });
 
@@ -27,23 +31,23 @@ router.get('/:id', function(req, res) {
         return res.status(500).send('Invalid ID');
     }
 
-    Namespace.findById(id, function(err, namespace) {
+    Content.findById(id, function(err, content) {
         if (err) {
             return res.status(500).send(err);
         }
-        if (!namespace) {
+        if (!content) {
             return res.status(404).end();
         }
-        res.json(namespace);
+        res.json(content);
     });
 });
 
 router.get('/', auth.isAuthenticated(), function(req, res) {
-    Namespace.find({
+    Content.find({
         'users': req.user._id
     }, function(err, namespaces) {
         res.send(namespaces);
-    });
+    })
 });
 
 router.post('/update-content', function(req, res) {

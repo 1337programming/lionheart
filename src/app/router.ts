@@ -7,8 +7,10 @@ import {Signup} from './signup/signup';
 import {Namespaces} from './namespaces/namespaces';
 import {NewNamespace} from './namespaces/new/new-namespace';
 import {ViewNamespace} from './namespaces/view/view-namespace';
+
 //Content
 import {Content} from './content/content';
+import {NewContent} from './content/new/new-content';
 
 export class Router {
 	routes: Array<any>;
@@ -27,8 +29,11 @@ export class Router {
 			{ path: '/namespaces', name: 'Namespaces', component: Namespaces },
 			{ path: '/namespaces/new', name: 'NewNamespace', component: NewNamespace },
 			{ path: '/namespaces/:id', name: 'ViewNamespace', component: ViewNamespace },
+
 			//Content
-			{ path: '/content', name: 'Content', component: Content}
+			{ path : '/content', name: 'Content', component: Content},
+			{ path: '/namespaces/:namespaceId/content', name: 'NamespaceContent', component: Content},
+			{ path: '/namespaces/:namespaceId/content/new', name: 'NewContent', component: NewContent}
 		];
 	}
 }

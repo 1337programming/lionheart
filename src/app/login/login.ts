@@ -24,14 +24,12 @@ export class Login {
 
   signIn(event) {
 	  event.preventDefault();
-	  let headers = new Headers();
-	  headers.append('Content-Type', 'application/json');
 	  let props = this.loginForm.value;
 	  let body = JSON.stringify({
 		  email: props.email,
 		  password: props.password
 	  });
-	  this.http.post('http://localhost:8080/auth/local/', body, {headers}).subscribe(
+	  this.http.post('http://localhost:8080/auth/local/', body, this.userService.headersObj).subscribe(
 	    data => {
 			let body = JSON.parse(data.text());
 			if (body && body.token) {

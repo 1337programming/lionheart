@@ -1,3 +1,8 @@
 <div class="container">
-	<h1>Manage Your Content</h1>
+    <h1>Manage Your Content</h1>
+    <div *ngFor="#namespace of namespaceService.namespaces | async">
+        <div *ngFor="#content of namespace.content">
+        	{{content.key}} {{content.value}}
+        </div>
+    </div>
 </div>

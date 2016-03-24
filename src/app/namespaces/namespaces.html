@@ -1,7 +1,7 @@
 <div class="container">
 	<h1>Manage Your Namespaces</h1>
     <button class="btn btn-primary" (click)="newNamespace()">Create a new Namespace</button>
-    <div *ngFor="#namespace of links">
+    <div *ngFor="#namespace of namespaceService.namespaces | async">
         <div>
             <h2>{{namespace.name}}</h2>
             <button class="btn btn-secondary" (click)="openNamespace(namespace)">View</button>
