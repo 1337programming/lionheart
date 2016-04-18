@@ -1,6 +1,6 @@
-import {Injectable} from 'angular2/core';
-import {Subject, BehaviorSubject} from 'rxjs';
-import {Headers} from 'angular2/http';
+import {Injectable} from "angular2/core";
+import {Subject, BehaviorSubject} from "rxjs";
+import {Headers} from "angular2/http";
 
 @Injectable()
 export class UserService {

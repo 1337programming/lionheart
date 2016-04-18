@@ -12,9 +12,7 @@ var ContentSchema = new Schema({
 });
 
 ContentSchema.pre('save', function(next) {
-	var date = new Date();
-	this.createdDate = this.createdDate || date;
-	this.modifiedDate = date;
+	console.log('Saving', this);
     next();
 });
 

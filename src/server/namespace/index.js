@@ -3,6 +3,14 @@ var Namespace = require('./namespace.model');
 var User = require('../user/user.model');
 var auth = require('../auth/auth.service');
 var mongoose = require('mongoose');
+var handleError = require('../api-util').handleError;
+var validationError = require('../api-util').validationError;
+function save(res, namespace) {
+    namespace.save(function(err, namespace) {
+        if (err) return handleError(res);
+        res.status(200).json(namespace);
+    });
+}
 
 router.post('/', auth.isAuthenticated(), function(req, res) {
     var data = {
@@ -11,13 +19,7 @@ router.post('/', auth.isAuthenticated(), function(req, res) {
         users: [req.user._id]
     };
     var newNamespace = new Namespace(data);
-    newNamespace.save(function(err, namespace, numAffected) {
-        if (err) {
-            return res.status(500).send(err);
-        }
-
-        res.json(namespace);
-    });
+    save(res, newNamespace);
 });
 
 
@@ -45,19 +47,29 @@ router.get('/', auth.isAuthenticated(), function(req, res) {
         res.send(namespaces);
     });
 });
-
-router.post('/update-content', function(req, res) {
+router.post('/:id/content/', auth.isAuthenticated(), function(req, res) {
     var data = req.body;
-    Namespace.findByIdAndUpdate(data.id, {
-            $set: {
-                name: data.name,
-                content: data.content
-            }
-        },
-        function(err, data) {
-            console.log(err, data);
+    console.log('Request received!', JSON.stringify(req.body), JSON.stringify(req.params));
+    if (!data.key || data.key.trim() === '') {
+        return validationError(res);
+    }
+    Namespace.findById(req.params.id, function(err, namespace) {
+       if (err) return handleError(res);
+        var curDate = new Date();
+        console.log('Creating content');
+        namespace.content.push({
+            key: data.key,
+            value: data.value || '',
+            description: data.description || '',
+            createdDate: curDate,
+            creator: req.user._id,
+            modifiedDate: curDate,
+            modifier: req.user._id
         });
-    res.sendStatus(200).end();
+        save(res, namespace);
+    });
 });
 
 module.exports = router;
+
+

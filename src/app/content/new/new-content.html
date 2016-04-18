@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Create New Content</h1>
-    <form [ngFormModel]="newContentForm" (submit)="createContent($event)">
+    <form [ngFormModel]="newContentForm" (submit)="createNewContent($event)">
         <label for="key" class="sr-only">Key</label>
         <input ngControl="key" type="text" id="key" class="form-control" placeholder="Key" required autofocus>
 

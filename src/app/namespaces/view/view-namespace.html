@@ -2,5 +2,8 @@
     <h1>{{namespace.name}}</h1>
     <h2>View</h2>
     <button class="btn btn-secondary" (click)="addContent(namespace)">Add a Content Item</button>
+    <div *ngFor="#content of namespace.content">
+        {{content.key}} {{content.value}}
+    </div>
 </div>
 

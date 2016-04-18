@@ -5,21 +5,8 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../config');
 var jwt = require('jsonwebtoken');
-
-function validationError(res, statusCode) {
-    statusCode = statusCode || 422;
-    return function(err) {
-        console.log('validationError', err, err.stack);
-        res.status(statusCode).json(err);
-    }
-}
-
-function handleError(res, statusCode) {
-    statusCode = statusCode || 500;
-    return function(err) {
-        res.status(statusCode).send(err);
-    };
-}
+var handleError = require('../api-util').handleError;
+var validationError = require('../api-util').validationError;
 
 /**
  * Get list of users
@@ -42,7 +29,6 @@ UserController.create = function create(req, res, next) {
     var newUser = new User(req.body);
     newUser.provider = 'local';
     newUser.role = 'user';
-    console.log('Saving newUser', newUser);
     newUser.save(function(err, user, numAffected) {
         if (err) {
             return res.status(500).send(err);
