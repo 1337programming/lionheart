@@ -5,7 +5,8 @@ dist/
 src/**/*.js
 src/*.js
 npm-debug.log
-typings/
+typings/globals
+tyings/modules
 .idea
 *.swp
 !src/server/**/*.js

@@ -7,7 +7,7 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --hot --inline --progress --profile --colors --display-error-details --display-cached",
     "prod": "webpack --prod",
-    "server": "node src/server",
+    "server": "ts-node src/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -44,8 +44,8 @@
     "jquery": "^2.2.0",
     "json-loader": "^0.5.4",
     "jsonwebtoken": "^5.5.4",
-    "mongoose": "4.4.1",
     "moment": "^2.10.3",
+    "mongoose": "4.4.1",
     "node-sass": "^3.4.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -55,11 +55,11 @@
     "socketio-jwt": "^4.3.4",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.8.0",
+    "ts-node": "^0.9.1",
     "typescript": "^1.7.5",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.13",
     "yargs": "^3.32.0",
     "zone.js": "^0.5.15"
-  },
-  "devDependencies": {}
+  }
 }
