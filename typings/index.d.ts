@@ -1,3 +1,4 @@
+/// <reference path="custom/socketio-jwt/index.d.ts" />
 /// <reference path="globals/body-parser/index.d.ts" />
 /// <reference path="globals/es6-shim/index.d.ts" />
 /// <reference path="globals/express-jwt/index.d.ts" />

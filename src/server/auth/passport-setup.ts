@@ -1,21 +1,21 @@
-var passportSetup = module.exports = {};
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var passportSetup:any = {};
+let passport = require('passport');
+let LocalStrategy = require('passport-local').Strategy;
 
 function localAuthenticate(User, email, password, done) {
   User.findOne({
     email: email.toLowerCase()
-  }, function(err, user) {
+  }, (err, user) => {
     if (err) {
       return done(err);
     }
     if (!user) {
       return done(null, false, {
         message: 'This email is not registered.'
-      })
+      });
     }
     console.log('User, email', email, password);
-    user.authenticate(password, function(authError, authenticated) {
+    user.authenticate(password, (authError, authenticated) => {
       console.log(authError, authenticated);
       if (authError) {
         return done(authError);
@@ -30,11 +30,13 @@ function localAuthenticate(User, email, password, done) {
   });
 }
 
-passportSetup.setup = function(User) {
-	passport.use(new LocalStrategy({
-		usernameField: 'email',
-		passwordField: 'password'
-	}, function(email, password, done) {
-		return localAuthenticate(User, email, password, done);
-	}));
+passportSetup.setup = (User) => {
+  passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  }, (email, password, done) => {
+    return localAuthenticate(User, email, password, done);
+  }));
 };
+
+export default passportSetup;

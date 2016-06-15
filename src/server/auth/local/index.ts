@@ -1,10 +1,12 @@
-var router = require('express').Router();
-var passport = require('passport');
-var signToken = require('../auth.service').signToken;
+import AuthService from '../auth.service';
 
-router.post('/', function(req, res, next) {
+let router = require('express').Router();
+let passport = require('passport');
+var signToken = AuthService.signToken;
+
+router.post('/', (req, res, next) => {
   console.log('Received request!!', req.body, JSON.stringify(req.body));
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('local', (err, user, info) => {
     console.log(err, user,info);
     var error = err || info;
     if (error) {
@@ -19,4 +21,5 @@ router.post('/', function(req, res, next) {
   })(req, res, next)
 });
 
-module.exports = router;
+var LocalAuth = router;
+export default LocalAuth;

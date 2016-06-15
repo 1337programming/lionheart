@@ -6,8 +6,9 @@ src/**/*.js
 src/*.js
 npm-debug.log
 typings/globals
-tyings/modules
+typings/modules
 .idea
 *.swp
 !src/server/**/*.js
 .DS_Store
+data
