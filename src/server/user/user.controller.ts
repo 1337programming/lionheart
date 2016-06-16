@@ -18,7 +18,6 @@ UserController.index = (req, res) => {
     .catch(Util.handleError(res));
 };
 
-
 /**
  * Creates a new user
  */
